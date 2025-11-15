@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <title>Gerenciar Quartos — Admin</title>
+  <link rel="stylesheet" href="gerenciar_quartos.css">
+</head>
+<body>
+
+  <!-- SIDEBAR (seu código, mantido exatamente) -->
+  <aside class="sidebar">
+    <h2 class="sidebar-title"><a href="../admin_main/adm_home.html">Painel Admin</a></h2>
+
+    <nav>
+        <a href="../gerenciar_quartos/gerenciar_quartos.html">🛏 Gerenciar Quartos</a>
+        <a href="#">🔑 Gerenciar Vagas</a>
+        <a href="#">👥 Gerenciar Usuários</a>
+        <a href="#">⚙ Configurações</a>
+        <a href="../../login/login.html">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="main-area">
+    <header class="topbar">
+      <h1>Gerenciar Quartos</h1>
+      <button class="btn-add" id="btnAdd">+ Adicionar Quarto</button>
+    </header>
+
+    <section id="lista-quartos" class="lista-quartos" aria-live="polite">
+      <!-- Cards carregados via JS -->
+    </section>
+  </main>
+
+  <script src="gerenciar_quartos.js"></script>
+</body>
+</html>
