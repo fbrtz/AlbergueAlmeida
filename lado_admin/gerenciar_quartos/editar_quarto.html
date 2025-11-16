@@ -5,13 +5,14 @@
 <title>Editar Quarto</title>
 <link rel="stylesheet" href="editar_quarto.css">
 </head>
-
 <body>
 
 <div class="container">
-    <h1>Editar Quarto</h1>
+    <h1 id="page-title">Editar Quarto</h1>
 
     <form id="form-editar">
+        <input type="hidden" id="quarto_id" value="">
+
         <label>Título:</label>
         <input type="text" id="titulo" required>
 
@@ -23,6 +24,14 @@
 
         <label>Preço Base:</label>
         <input type="number" step="0.01" id="preco_base" required>
+
+        <!-- TAGS -->
+        <label>Características (tags):</label>
+        <div class="tag-controls">
+          <input type="text" id="carac-search" placeholder="Pesquisar / digite e pressione Enter para criar">
+          <div id="suggestions" class="suggestions" style="display:none;"></div>
+        </div>
+        <div id="carac-tags" class="tag-list" aria-live="polite"></div>
 
         <h3>Imagens do Quarto</h3>
 
@@ -40,7 +49,10 @@
 
         <hr><br>
 
-        <button type="submit" class="btn-edit">Salvar Alterações</button>
+        <div class="form-actions">
+          <button type="button" id="btn-cancel" class="btn-cancel">Cancelar</button>
+          <button type="submit" class="btn-edit" id="btn-save">Salvar Alterações</button>
+        </div>
     </form>
 </div>
 

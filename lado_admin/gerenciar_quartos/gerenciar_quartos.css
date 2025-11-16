@@ -216,12 +216,36 @@ body {
   cursor: pointer;
   font-weight: 600;
 }
+
+
+/* ---------- Tags / badges (quartos) ---------- */
+.carac-tags {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.carac-tags .tag {
+  background: #e6f7f6;       /* leve azul/verde pastel que combina */
+  color: #003366;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+}
+
+
 .btn-edit { background: #003366; color: white; }
 .btn-edit:hover { background: #b6e4e3; color: #003366; }
 .btn-delete { background: #d93b3b; color: white; }
 .btn-delete:hover { background: #ff6868; }
 .btn-vagas { background: #b6e4e3; color: #003366; }
 .btn-vagas:hover { background: #003366; color: white; }
+.btn-reservas { background: #0c2635; color: #ffffff; }
+.btn-reservas:hover { background: #b6c8db; color: #0c2635; }
 
 /* Responsividade simples */
 @media (max-width: 900px) {

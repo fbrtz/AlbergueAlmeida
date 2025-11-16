@@ -20,13 +20,13 @@ $totalVagas = $sql1->fetch_assoc()["total"];
 $sql2 = $con->query("SELECT COUNT(*) AS disp FROM vagas WHERE disponivel = 1");
 $vagasDisponiveis = $sql2->fetch_assoc()["disp"];
 
-// Reservas ativas (status confirmado)
 $sql3 = $con->query("
     SELECT COUNT(*) AS ativas 
     FROM reservas 
     WHERE status = 'confirmado'
+    AND inicio_periodo <= NOW()
 ");
-$reservasAtivas = $sql3->fetch_assoc()["ativas"];
+$reservasAtivas = $sql3->fetch_assoc()['ativas'];
 
 // % vagas ocupadas
 $totalOcupadas = $totalVagas - $vagasDisponiveis;

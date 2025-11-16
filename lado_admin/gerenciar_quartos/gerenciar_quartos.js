@@ -12,7 +12,7 @@
   // Ao carregar a página
   window.addEventListener("load", function () {
     document.getElementById("btnAdd")?.addEventListener("click", () => {
-      window.location.href = "novo_quarto.html";
+      window.location.href = "criar_quarto.html";
     });
     carregarQuartos();
   });
@@ -98,12 +98,32 @@
       // INFO
       const info = document.createElement("div");
       info.className = "card-info";
+
+      let caracsHtml = "";
+      if (Array.isArray(q.caracteristicas) && q.caracteristicas.length > 0) {
+        caracsHtml = `
+          <div class="carac-tags">
+            ${q.caracteristicas
+              .map(c => `<span class="tag" title="Característica">${escapeHtml(c.nome)}</span>`)
+              .join("")}
+          </div>
+        `;
+      }
+
       info.innerHTML = `
         <h2>${escapeHtml(q.titulo)}</h2>
+
         <p><strong>Total de Vagas:</strong> ${escapeHtml(q.total_vagas)}</p>
-        <p><strong>Preço Base:</strong> R$ ${Number(q.preco_base).toFixed(2)}</p>
+
+        <p><strong>Preço Base:</strong> 
+          R$ ${Number(q.preco_base).toFixed(2)}
+        </p>
+
+        ${caracsHtml}
+
         <p>${escapeHtml(q.descricao || "")}</p>
       `;
+
 
       // ACOES
       const acoes = document.createElement("div");
@@ -112,6 +132,7 @@
         <button class="btn-edit" title="Editar" data-id="${q.id}">Editar</button>
         <button class="btn-delete" title="Excluir" data-id="${q.id}">Excluir</button>
         <button class="btn-vagas" title="Listar Vagas" data-id="${q.id}">Listar Vagas</button>
+        <button class="btn-reservas" title="Listar Reservas" data-id="${q.id}">Listar Reservas</button>
       `;
 
       // eventos acoes
@@ -120,7 +141,10 @@
       });
       acoes.querySelector(".btn-delete").addEventListener("click", () => excluirQuarto(q.id, card));
       acoes.querySelector(".btn-vagas").addEventListener("click", () => {
-        window.location.href = `listar_vagas.html?quarto_id=${q.id}`;
+        window.location.href = `../gerenciar_vagas/gerenciar_vagas.html?quarto_id=${q.id}`;
+      });
+      acoes.querySelector(".btn-reservas").addEventListener("click", () => {
+        window.location.href = `../gerenciar_reservas/gerenciar_reservas.html?quarto_id=${q.id}`;
       });
 
       // montar card

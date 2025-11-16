@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Editar Reserva</title>
+<link rel="stylesheet" href="editar_reserva.css">
+</head>
+<body>
+
+<h2>Editar Reserva</h2>
+
+<form id="form-edit">
+    <input type="hidden" id="reserva_id">
+
+    <label>Vaga:</label>
+    <select id="vaga_id" required></select>
+
+    <label>Início:</label>
+    <input type="datetime-local" id="inicio_periodo" required>
+
+    <label>Fim:</label>
+    <input type="datetime-local" id="fim_periodo" required>
+
+    <label>Status:</label>
+    <select id="status">
+        <option value="pendente">Pendente</option>
+        <option value="confirmado">Confirmado</option>
+        <option value="cancelado">Cancelado</option>
+    </select>
+
+    <label>Valor total:</label>
+    <input type="number" id="valor_total" step="0.01" required>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<script src="editar_reserva.js"></script>
+
+</body>
+</html>

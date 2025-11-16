@@ -1,5 +1,5 @@
 -- Criação do Banco
-DROP DATABASE albergue_almeida;
+DROP DATABASE IF EXISTS  albergue_almeida;
 
 -- Criar o banco de dados
 CREATE DATABASE IF NOT EXISTS albergue_almeida;
@@ -49,20 +49,6 @@ CREATE TABLE IF NOT EXISTS vagas (
     criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
     atualizado_em DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (quarto_id) REFERENCES quartos(id) ON DELETE CASCADE
-);
-
-CREATE TABLE imagem (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    caminho TEXT NOT NULL
-);
-
-CREATE TABLE quarto_imagem (
-    id_quarto INT,
-    id_imagem INT,
-    ordem INT DEFAULT 0,
-    PRIMARY KEY (id_quarto, id_imagem),
-    FOREIGN KEY (id_quarto) REFERENCES quartos(id) ON DELETE CASCADE,
-    FOREIGN KEY (id_imagem) REFERENCES imagem(id) ON DELETE CASCADE
 );
 
 -- Tabela caracteristicas_quartos (depende de quartos e caracteristicas)
@@ -142,3 +128,25 @@ INSERT INTO caracteristicas_quartos (quarto_id,caracteristica_id) VALUES
 
 INSERT INTO caracteristicas_vagas (vaga_id,caracteristica_id) VALUES 
 (1,5);
+
+
+-- Exemplo 1: Reserva para João Silva, com status 'pendente' (usando o DEFAULT)
+INSERT INTO reservas (vaga_id, hospede_id, inicio_periodo, fim_periodo, valor_total) 
+VALUES (
+    1, -- vaga_id (Beliche Superior)
+    2, -- hospede_id (João Silva)
+    '2025-12-01 14:00:00', -- inicio_periodo
+    '2025-12-05 11:00:00', -- fim_periodo
+    450.00 -- valor_total (Ex: (Preço Base 100 + Adicional 30) * 3.5 dias, ou um valor calculado)
+);
+
+-- Exemplo 2: Reserva para Maria Santos, com status 'confirmado' (definido manualmente)
+INSERT INTO reservas (vaga_id, hospede_id, inicio_periodo, fim_periodo, status, valor_total) 
+VALUES (
+    1, -- vaga_id (Beliche Superior)
+    3, -- hospede_id (Maria Santos)
+    '2025-12-10 14:00:00', -- inicio_periodo
+    '2025-12-12 11:00:00', -- fim_periodo
+    'confirmado', -- status
+    260.00 -- valor_total (Ex: (Preço Base 100 + Adicional 30) * 2 dias)
+);
