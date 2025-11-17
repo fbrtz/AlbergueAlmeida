@@ -72,11 +72,13 @@
 
                   if (response.success) {
                       // Preenche o input correto
-                      document.getElementById(targetInputId).value = response.path;
+                        const inputElement = document.getElementById(targetInputId);
 
-                      // Atualiza preview automaticamente
-                      const previewId = "preview" + targetInputId.replace("img", "");
-                      document.getElementById(previewId).src = response.path;
+                        // Preenche o campo
+                        inputElement.value = response.path;
+
+                        // Dispara evento "input" para ativar a função ativarPreview()
+                        inputElement.dispatchEvent(new Event("input"));
                   } else {
                       alert("Erro no upload: " + response.error);
                   }
