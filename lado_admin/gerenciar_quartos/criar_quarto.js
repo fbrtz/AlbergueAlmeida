@@ -110,14 +110,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const chip = document.createElement("span");
             chip.className = "tag-chip";
-            chip.innerHTML = `${t.nome} <span class="remove-tag" data-id="${id}">×</span>`;
+            chip.innerHTML = `${t.nome} <span class="remove-tag" data-id="${t.id}">✕</span>`;
             container.appendChild(chip);
         });
 
         // remover tag
         document.querySelectorAll(".remove-tag").forEach(btn => {
             btn.onclick = () => {
-                selecionadas.delete(btn.dataset.id);
+                selecionadas.delete(Number(btn.dataset.id));
                 renderTags();
             };
         });
@@ -142,12 +142,11 @@ document.addEventListener("DOMContentLoaded", () => {
             // retorno OK|id_quarto
             if (!txt.startsWith("OK")) {
                 alert("Inserido: " + txt);
-                return;
             }
 
             const quartoID = txt.replace("OK|", "").trim();
 
-            // agora vincula características
+            //vinculando características
             const lista = [...selecionadas];
 
             Promise.all(lista.map(id => {
@@ -161,7 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }))
             .then(() => {
-                alert("Quarto criado com sucesso!");
                 window.location.href = "gerenciar_quartos.html";
             });
         });
@@ -196,5 +194,62 @@ document.addEventListener("DOMContentLoaded", () => {
     ativarPreview("img0", "preview0");
     ativarPreview("img1", "preview1");
     ativarPreview("img2", "preview2");
+
+
+
+
+
+
+      function uploadImage(targetInputId) {
+      // Cria input de arquivo invisível
+      const fileInput = document.createElement("input");
+      fileInput.type = "file";
+      fileInput.accept = "image/*";
+
+      fileInput.onchange = () => {
+          const file = fileInput.files[0];
+          if (!file) return;
+
+          const formData = new FormData();
+          formData.append("image", file);
+
+          const xhr = new XMLHttpRequest();
+          xhr.open("POST", "api/upload.php");
+
+          xhr.onload = function () {
+              if (xhr.status === 200) {
+                  const response = JSON.parse(xhr.responseText);
+
+                  if (response.success) {
+                      // Preenche o input correto
+                        const inputElement = document.getElementById(targetInputId);
+
+                        // Preenche o campo
+                        inputElement.value = response.path;
+
+                        // Dispara evento "input" para ativar a função ativarPreview()
+                        inputElement.dispatchEvent(new Event("input"));
+                  } else {
+                      alert("Erro no upload: " + response.error);
+                  }
+              } else {
+                  alert("Falha ao enviar arquivo.");
+              }
+          };
+
+          xhr.send(formData);
+      };
+
+      fileInput.click();
+  }
+
+
+  function initUploadButtons() {
+    document.getElementById("uploadBtn0").addEventListener("click", () => uploadImage("img0"));
+    document.getElementById("uploadBtn1").addEventListener("click", () => uploadImage("img1"));
+    document.getElementById("uploadBtn2").addEventListener("click", () => uploadImage("img2"));
+  }
+
+  initUploadButtons();
 
 });

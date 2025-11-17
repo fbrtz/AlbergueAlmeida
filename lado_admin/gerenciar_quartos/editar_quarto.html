@@ -26,25 +26,30 @@
         <input type="number" step="0.01" id="preco_base" required>
 
         <!-- TAGS -->
-        <label>Características (tags):</label>
+        <label>Características:</label>
         <div class="tag-controls">
-          <input type="text" id="carac-search" placeholder="Pesquisar / digite e pressione Enter para criar">
+          <input type="text" id="carac-search" placeholder="Pesquisar / digite e pressione enter para criar">
           <div id="suggestions" class="suggestions" style="display:none;"></div>
         </div>
         <div id="carac-tags" class="tag-list" aria-live="polite"></div>
 
         <h3>Imagens do Quarto</h3>
-
+        
+        
         <label>Imagem 1 (obrigatória):</label>
         <input type="text" id="img0" required>
+        <button type="button" id="uploadBtn0" class="btn-upload">Upload</button>
         <img id="preview0" class="preview" alt="Prévia da imagem 0">
-
+        
         <label>Imagem 2:</label>
         <input type="text" id="img1">
+        <button type="button" id="uploadBtn1" class="btn-upload">Upload</button>
         <img id="preview1" class="preview" alt="Prévia da imagem 1">
+
 
         <label>Imagem 3:</label>
         <input type="text" id="img2">
+        <button type="button" id="uploadBtn2" class="btn-upload">Upload</button>
         <img id="preview2" class="preview" alt="Prévia da imagem 2">
 
         <hr><br>

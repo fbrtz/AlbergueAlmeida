@@ -50,6 +50,55 @@
     return atualizarPreview; // devolve a função para chamar manualmente
   }
 
+  function uploadImage(targetInputId) {
+      // Cria input de arquivo invisível
+      const fileInput = document.createElement("input");
+      fileInput.type = "file";
+      fileInput.accept = "image/*";
+
+      fileInput.onchange = () => {
+          const file = fileInput.files[0];
+          if (!file) return;
+
+          const formData = new FormData();
+          formData.append("image", file);
+
+          const xhr = new XMLHttpRequest();
+          xhr.open("POST", "api/upload.php");
+
+          xhr.onload = function () {
+              if (xhr.status === 200) {
+                  const response = JSON.parse(xhr.responseText);
+
+                  if (response.success) {
+                      // Preenche o input correto
+                      document.getElementById(targetInputId).value = response.path;
+
+                      // Atualiza preview automaticamente
+                      const previewId = "preview" + targetInputId.replace("img", "");
+                      document.getElementById(previewId).src = response.path;
+                  } else {
+                      alert("Erro no upload: " + response.error);
+                  }
+              } else {
+                  alert("Falha ao enviar arquivo.");
+              }
+          };
+
+          xhr.send(formData);
+      };
+
+      fileInput.click();
+  }
+
+
+  function initUploadButtons() {
+    document.getElementById("uploadBtn0").addEventListener("click", () => uploadImage("img0"));
+    document.getElementById("uploadBtn1").addEventListener("click", () => uploadImage("img1"));
+    document.getElementById("uploadBtn2").addEventListener("click", () => uploadImage("img2"));
+  }
+
+
   // init
   window.addEventListener("load", () => {
     if (idParam) {
@@ -78,6 +127,9 @@
 
     // guarda as funções para usar dentro do loadQuarto
     window.previewsAtualizar = previewsAtualizar;
+
+    // upload buttons
+    initUploadButtons();
   });
 
   function loadQuarto(id) {
@@ -97,12 +149,12 @@
       document.getElementById("img1").value = q.img1 || "";
       document.getElementById("img2").value = q.img2 || "";
 
-      // **Chama os previews manualmente após preencher os campos**
+      // Chama os previews manualmente após preencher os campos
       if (window.previewsAtualizar) {
         window.previewsAtualizar.forEach(fn => fn());
       }
 
-      // fetch characteristics for this quarto
+      // sincroniza as características do quarto
       const xhr2 = new XMLHttpRequest();
       xhr2.open("GET", "api/listar_caracteristicas_quarto.php?quarto_id=" + encodeURIComponent(id), true);
       xhr2.onload = function() {
@@ -115,7 +167,6 @@
     xhr.send();
   }
 
-  // resto do código permanece igual (renderTags, onSearch, criarCaracteristica, vincular, desvincular, onCancel, onSubmit, debounce, escapeHtml)
   function renderTags(){
     tagsContainer.innerHTML = "";
     tags.forEach(t => {

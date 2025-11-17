@@ -27,6 +27,25 @@ body {
     width: calc(100% - 250px);
 }
 
+/* Botão de upload de imagem */
+.btn-upload {
+    background: #0066cc;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+.btn-upload:hover {
+    background: #004999;
+}
+
+
+
 /* Título da página */
 .container h1 {
     margin: 0 0 25px 0;
@@ -116,9 +135,6 @@ body {
 
 
 
-
-
-
 /* Para não colar no topo em telas pequenas */
 @media (max-width: 700px) {
     .container {
@@ -157,6 +173,7 @@ body {
 .tag-option:hover {
     background: #eef3ff;
 }
+
 
 
 /* suggestions & tag list */
