@@ -4,17 +4,19 @@
   const API_EXCLUIR = "api/excluir_vaga.php";
 
   window.addEventListener("load", function () {
-    const btnAdd = document.getElementById("btnAdd");
-    if (btnAdd) {
-      btnAdd.addEventListener("click", () => {
-        const params = new URLSearchParams(window.location.search);
-        const qid = params.get("quarto_id");
-        let url = "editar_vaga.html";
-        if (qid) url += "?quarto_id=" + encodeURIComponent(qid);
-        window.location.href = url;
-      });
-    }
-    carregarVagas();
+      const btnAdd = document.getElementById("btnAdd");
+      if (btnAdd) {
+        btnAdd.addEventListener("click", () => {
+          const params = new URLSearchParams(window.location.search);
+          const qid = params.get("quarto_id");
+
+          let url = "editar_vaga.html?modo=criar";
+          if (qid) url += `&quarto_id=${encodeURIComponent(qid)}`;
+
+          window.location.href = url;
+        });
+      }
+      carregarVagas();
   });
 
   function carregarVagas() {
@@ -50,7 +52,14 @@
     const grupos = {};
     vagas.forEach(v => {
       const qid = v.quarto_id;
-      if (!grupos[qid]) grupos[qid] = { quarto_titulo: v.quarto_titulo || ("Quarto " + qid), vagas: [] };
+      //if (!grupos[qid]) grupos[qid] = { quarto_titulo: v.quarto_titulo || ("Quarto " + qid), vagas: [] };
+      if (!grupos[qid]) {
+          grupos[qid] = { 
+              quarto_titulo: v.quarto_titulo || ("Quarto " + qid),
+              quarto_total_vagas: Number(v.quarto_total_vagas || 0),
+              vagas: []
+          };
+      }
       grupos[qid].vagas.push(v);
     });
 
@@ -66,7 +75,27 @@
 
       const header = document.createElement("div");
       header.className = "group-header";
-      header.innerHTML = `<h3>${escapeHtml(grupo.quarto_titulo)}</h3><div>${grupo.vagas.length} vagas</div>`;
+      //header.innerHTML = `<h3>${escapeHtml(grupo.quarto_titulo)}</h3><div>${grupo.vagas.length} vagas</div>`; substituido pelo proximo
+
+      const usadas = grupo.vagas.length;
+      const total = grupo.quarto_total_vagas;
+
+      let badge = "";
+      if (total > 0) {
+          if (usadas > total) {
+              badge = `<span class="badge-excedente">Excedente</span>`;
+          } else if (usadas === total) {
+              badge = `<span class="badge-cheio">Cheio</span>`;
+          }
+      }
+
+      header.innerHTML = `
+          <h3>
+              ${escapeHtml(grupo.quarto_titulo)}
+              ${badge}
+          </h3>
+          <div>${usadas} / ${total} vagas</div>
+      `;
 
       const list = document.createElement("div");
       list.className = "vaga-list";
@@ -126,7 +155,8 @@
         const btnEdit = actions.querySelector(".btn-edit");
         if (btnEdit) {
           btnEdit.addEventListener("click", () => {
-            window.location.href = `editar_vaga.html?vaga_id=${v.id}&quarto_id=${v.quarto_id}`;
+            //window.location.href = `editar_vaga.html?vaga_id=${v.id}&quarto_id=${v.quarto_id}`;
+            window.location.href = `editar_vaga.html?modo=editar&vaga_id=${v.id}&quarto_id=${v.quarto_id}`;
           });
         }
 
@@ -141,7 +171,7 @@
         const btnVagas = actions.querySelector(".btn-vagas");
         if (btnVagas) {
           btnVagas.addEventListener("click", () => {
-            window.location.href = `../reservas/listar_reservas.html?vaga_id=${v.id}`;
+            window.location.href = `../gerenciar_reservas/gerenciar_reservas.html?vaga_id=${v.id}`;
           });
         }
 

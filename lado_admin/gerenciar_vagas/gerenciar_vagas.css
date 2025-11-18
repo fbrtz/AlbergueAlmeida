@@ -121,3 +121,24 @@
 }
 
 
+.badge-cheio {
+    background: #ffcccc;
+    color: #660000;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    margin-left: 10px;
+    font-weight: 700;
+}
+
+.badge-excedente {
+    background: #ff9999;
+    color: #660000;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    margin-left: 10px;
+    border: 1px solid #cc0000;
+    font-weight: 700;
+}
+

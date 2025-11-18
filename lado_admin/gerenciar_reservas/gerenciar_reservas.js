@@ -10,15 +10,29 @@
 
   function carregarReservas() {
     const params = new URLSearchParams(window.location.search);
+    const vagaId = params.get("vaga_id") || "";
     const quartoId = params.get("quarto_id") || "";
 
     const xhr = new XMLHttpRequest();
+    // Sempre busca todas as reservas (o filtro será feito no front-end)
     xhr.open("GET", API_LISTAR + (quartoId ? ("?quarto_id=" + encodeURIComponent(quartoId)) : ""), true);
     xhr.onload = function () {
       const container = document.getElementById("reservas-container");
       if (xhr.status === 200) {
         try {
-          const data = JSON.parse(xhr.responseText);
+          let data = JSON.parse(xhr.responseText);
+
+          // Se houver vaga_id na URL, filtra apenas essa reserva
+          if (vagaId) {
+            data = data.filter(r => String(r.vaga_id) === vagaId);
+
+            // Remove o parâmetro da URL sem recarregar a página
+            params.delete("vaga_id");
+            const newQuery = params.toString();
+            const newUrl = window.location.pathname + (newQuery ? "?" + newQuery : "");
+            window.history.replaceState({}, "", newUrl);
+          }
+
           renderizarGrupos(data);
         } catch (err) {
           container.innerText = "Erro ao processar resposta do servidor.";
@@ -34,7 +48,7 @@
     xhr.send();
   }
 
-  // data: array de reservas (cada reserva tem campos: id, vaga_id, vaga_nome, quarto_id, quarto_titulo, hospede_id, hospede_nome, inicio_periodo, fim_periodo, status, valor_total)
+  // array de reservas (cada reserva tem campos: id, vaga_id, vaga_nome, quarto_id, quarto_titulo, hospede_id, hospede_nome, inicio_periodo, fim_periodo, status, valor_total)
   function renderizarGrupos(reservas) {
     const container = document.getElementById("reservas-container");
     container.innerHTML = "";
@@ -80,7 +94,7 @@
         else futuras.push(r);
       });
 
-      // helper render section
+      // ajuda a renderizar seção
       function renderSection(title, arr) {
         const sec = document.createElement("div");
         sec.className = "reserva-section";
@@ -93,7 +107,7 @@
       list.appendChild(renderSection("Futuras / Não iniciadas", futuras));
       list.appendChild(renderSection("Encerradas", encerradas));
 
-      // toggle collapse
+      // colapsar/expandir
       header.addEventListener("click", () => {
         list.classList.toggle("show");
       });
@@ -131,13 +145,13 @@
 
     const actions = document.createElement("div");
     actions.className = "reserva-actions";
+
     // Buttons:
     const btnViewGuest = document.createElement("button");
     btnViewGuest.className = "btn-edit";
     btnViewGuest.textContent = "Ver Hóspede";
     btnViewGuest.addEventListener("click", () => {
-      // ajusta para sua rota de visualizar usuário
-      window.location.href = `../usuarios/visualizar_usuario.html?usuario_id=${encodeURIComponent(r.hospede_id)}`;
+      window.location.href = `../gerenciar_usuarios/gerenciar_usuarios.html?usuario_id=${encodeURIComponent(r.hospede_id)}`;
     });
 
     const btnConfirm = document.createElement("button");
@@ -160,7 +174,6 @@
       window.location.href = `editar_reserva.html?id=${r.id}`;
     });
     actions.appendChild(btnEdit);
-
 
     const btnDelete = document.createElement("button");
     btnDelete.className = "btn-delete";
@@ -199,12 +212,13 @@
           const res = JSON.parse(xhr.responseText);
           if (res.status === "OK") {
             alert("Status atualizado.");
-            // recarregar lista para refletir mudanças (simples)
             carregarReservas();
           } else {
             alert("Erro: " + (res.erro || "desconhecido"));
           }
-        } catch (err) { alert("Resposta inválida do servidor."); }
+        } catch (err) {
+          alert("Resposta inválida do servidor.");
+        }
       } else {
         alert("Erro ao atualizar status.");
       }
@@ -222,12 +236,13 @@
           const res = JSON.parse(xhr.responseText);
           if (res.status === "OK") {
             alert("Reserva excluída.");
-            // remover elemento visualmente ou recarregar
             carregarReservas();
           } else {
             alert("Erro: " + (res.erro || "desconhecido"));
           }
-        } catch (err) { alert("Resposta inválida do servidor."); }
+        } catch (err) {
+          alert("Resposta inválida do servidor.");
+        }
       } else {
         alert("Erro ao excluir reserva.");
       }
@@ -237,7 +252,6 @@
 
   function fmtDateTime(s) {
     if (!s) return "";
-    // espera "YYYY-MM-DD HH:MM:SS"
     const t = s.replace(' ', 'T');
     const d = new Date(t);
     if (isNaN(d.getTime())) return s;

@@ -17,7 +17,8 @@ $sql = "
     SELECT 
         v.*, 
         q.titulo AS quarto_titulo,
-        q.preco_base AS quarto_preco_base
+        q.preco_base AS quarto_preco_base,
+        q.total_vagas AS quarto_total_vagas
     FROM vagas v
     JOIN quartos q ON v.quarto_id = q.id
 ";

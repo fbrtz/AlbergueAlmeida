@@ -1,0 +1,57 @@
+/* editar_usuario.css */
+.container input, .container select {
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  background:#fafafa;
+  margin-bottom:10px;
+}
+
+#form-title{
+    color: #003366;
+}
+
+.btn-salvar {
+  background: #003366;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: 0px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.1s ease;
+}
+
+.btn-salvar:hover {
+  background: #8bbef1;   /* um pouco mais escuro */
+  color: #000;
+}
+
+.btn-salvar:active {
+  transform: scale(0.98);
+}
+
+.btn-cancel {
+  background: #9e3e3e;
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: 0px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.btn-cancel:hover {
+  background: #f1bcbc;
+  color: #000;
+}
+
+.btn-cancel:active {
+  transform: scale(0.98);
+}
+
+#btnToggleSenha {
+  background:#f0ad4e; color:white; border:0; padding:8px 10px; border-radius:6px;
+}

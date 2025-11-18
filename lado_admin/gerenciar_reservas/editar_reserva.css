@@ -1,69 +1,118 @@
-/* Container alinhado com a sidebar */
-body {
-    margin-left: 250px;
-    padding: 28px;
-    max-width: 900px;
-    font-family: Arial, sans-serif;
-}
-
-/* Título */
-h2 {
-    font-size: 26px;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-/* Formulário */
-#form-edit label {
-    font-weight: bold;
-    display: block;
-    margin-top: 12px;
-    margin-bottom: 6px;
-}
-
-/* Inputs e selects */
-#form-edit input[type="text"],
-#form-edit input[type="datetime-local"],
-#form-edit input[type="number"],
-#form-edit select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 14px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background: #fafafa;
-    font-size: 15px;
-}
-
-/* Botão salvar */
-#form-edit button[type="submit"] {
-    background: #4CAF50;
+    
+    /* ----------------- SIDEBAR (seu estilo) ----------------- */
+.sidebar {
+    font-family: Inter, Arial, sans-serif;
+    width: 210px;
+    background: #003366;
+    height: 100vh;
+    padding: 20px;
     color: white;
-    padding: 10px 18px;
-    border: 0px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.sidebar-title {
+    font-size: 24px;
+    color: #b6e4e3;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar-title a {
+    color: #b6e4e3;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar-title a:hover {
+    color: #007bff;
+}
+
+.sidebar nav a {
+    display: block;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
     border-radius: 8px;
-    cursor: pointer;
+    margin-bottom: 10px;
     transition: 0.3s;
-    font-size: 15px;
-    margin-top: 10px;
 }
 
-/* Hover */
-#form-edit button[type="submit"]:hover {
-    opacity: 0.85;
+.sidebar nav a:hover {
+    background: #b6e4e3;
+    color: #003366;
 }
-
-/* Linha estética opcional */
-hr {
-    margin: 25px 0;
-    border: none;
-    border-bottom: 1px solid #ddd;
-}
-
-/* Responsividade */
-@media (max-width: 700px) {
+    
+    /* Container alinhado com a sidebar */
     body {
-        margin-left: 0;
-        padding: 18px;
+        margin-left: 250px;
+        padding: 28px;
+        max-width: 900px;
+        font-family: Arial, sans-serif;
     }
-}
+
+    /* Título */
+    h2 {
+        font-size: 26px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    /* Formulário */
+    #form-edit label {
+        font-weight: bold;
+        display: block;
+        margin-top: 12px;
+        margin-bottom: 6px;
+    }
+
+    /* Inputs e selects */
+    #form-edit input[type="text"],
+    #form-edit input[type="datetime-local"],
+    #form-edit input[type="number"],
+    #form-edit select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 14px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        background: #fafafa;
+        font-size: 15px;
+    }
+
+    /* Botão salvar */
+    #form-edit button[type="submit"] {
+        background: #4CAF50;
+        color: white;
+        padding: 10px 18px;
+        border: 0px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 15px;
+        margin-top: 10px;
+    }
+
+    /* Hover */
+    #form-edit button[type="submit"]:hover {
+        opacity: 0.85;
+    }
+
+    /* Linha estética opcional */
+    hr {
+        margin: 25px 0;
+        border: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Responsividade */
+    @media (max-width: 700px) {
+        body {
+            margin-left: 0;
+            padding: 18px;
+        }
+    }

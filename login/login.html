@@ -3,39 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <title>Login - Hostel</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">s
 <link rel="stylesheet" href="login.css">
 </head>
 
 <body>
 
-<header class="navbar">
-    <div class="logo">Santa Teresa Hostel</div>
-    <nav class="nav-links">
-      <a href="#">Reserva</a>
-      <a href="../sobre_nos/sobre_nos.html">Sobre Nós</a>
-      <a href="#">Parceiros</a>
-    </nav>
-    <div class="icons">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/1280px-Flag_of_the_United_States.svg.png" alt="Idioma">
-      <img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="Login">
+    <header class="navbar">
+        <div class="logo">Santa Teresa Hostel</div>
+        <nav class="nav-links">
+        <a href="#">Reserva</a>
+        <a href="../sobre_nos/sobre_nos.html">Sobre Nós</a>
+        <a href="#">Parceiros</a>
+        </nav>
+        <div class="icons">
+        </div>
+    </header>
+
+    <div class="login-container">
+        <h2>Entrar</h2>
+
+        <form id="formLogin">
+            <label>Email:</label>
+            <input type="email" id="email" required>
+
+            <label>Senha:</label>
+            <input type="password" id="senha" required>
+
+            <button type="submit">Entrar</button>
+            <p>Não possui conta? <a href="../cadastro2/cadastro.html">Crie uma!</a></p>
+
+            <p id="msg" class="msg"></p>
+        </form>
     </div>
-</header>
-
-<div class="login-container">
-    <h2>Entrar</h2>
-
-    <form id="formLogin">
-        <label>Email:</label>
-        <input type="email" id="email" required>
-
-        <label>Senha:</label>
-        <input type="password" id="senha" required>
-
-        <button type="submit">Entrar</button>
-
-        <p id="msg" class="msg"></p>
-    </form>
-</div>
 
 <script>
 document.getElementById("formLogin").addEventListener("submit", function(e){

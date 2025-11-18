@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro - Hostel</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="cadastro.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">Santa Teresa Hostel</div>
+    <nav class="nav-links">
+        <a href="#">Reserva</a>
+        <a href="../sobre_nos/sobre_nos.html">Sobre Nós</a>
+        <a href="#">Parceiros</a>
+    </nav>
+    <div class="icons"></div>
+</header>
+
+<div class="login-container">
+    <h2>Criar Conta</h2>
+
+    <form id="formCadastro">
+
+        <label>Nome completo:</label>
+        <input type="text" id="nome" required>
+
+        <label>Email:</label>
+        <input type="email" id="email" required>
+
+        <label>Senha:</label>
+        <input type="password" id="senha" required>
+
+        <label>Confirmar senha:</label>
+        <input type="password" id="confirmar" required>
+
+        <button type="submit">Cadastrar</button>
+
+        <p>Já possui conta? <a href="../login/login.html">Entrar</a></p>
+
+        <p id="msg" class="msg"></p>
+    </form>
+</div>
+
+<script>
+document.getElementById("formCadastro").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let nome = document.getElementById("nome").value;
+    let email = document.getElementById("email").value;
+    let senha = document.getElementById("senha").value;
+    let confirmar = document.getElementById("confirmar").value;
+    let msg = document.getElementById("msg");
+
+    if(senha !== confirmar){
+        msg.textContent = "As senhas não coincidem.";
+        return;
+    }
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "cadastro.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhr.onload = function(){
+        msg.textContent = this.responseText;
+
+        if(this.responseText === "sucesso"){
+            window.location.href = "../login/login.html";
+        }
+    };
+
+    xhr.send("nome=" + nome + "&email=" + email + "&senha=" + senha);
+});
+</script>
+
+</body>
+</html>

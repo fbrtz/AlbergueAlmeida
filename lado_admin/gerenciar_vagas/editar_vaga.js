@@ -11,6 +11,7 @@
   const params = new URLSearchParams(window.location.search);
   const vagaId = params.get("vaga_id");
   const quartoParam = params.get("quarto_id");
+  const modo = params.get("modo"); // criar | editar
 
   const quartoSelect = document.getElementById("quarto_id");
   const nomeEl = document.getElementById("nome");
@@ -22,13 +23,19 @@
   const form = document.getElementById("form-vaga");
   const vagaIdEl = document.getElementById("vaga_id");
 
-  // estado local: array de {id, nome}
   let tags = [];
-
-  // Lista de tags que foram vinculadas durante esta edição
   let vinculadasDuranteEdicao = [];
 
   window.addEventListener("load", () => {
+
+    // --- DEFINIR TÍTULO ---
+    const titleEl = document.getElementById("page-title");
+    if (modo === "criar") {
+        titleEl.textContent = "Criar Nova Vaga";
+    } else {
+        titleEl.textContent = "Editar Vaga";
+    }
+
     carregarQuartos().then(() => {
       if (quartoParam) quartoSelect.value = quartoParam;
       if (vagaId) carregarVaga(vagaId);
@@ -39,13 +46,11 @@
 
     form.addEventListener("submit", onSubmit);
 
-    // BOTÃO CANCELAR → desfaz vínculos novos e volta
     document.getElementById("btn-cancel").addEventListener("click", async (e) => {
       e.preventDefault();
       e.stopPropagation();
 
       if (vagaIdEl.value) {
-        // desfazer vínculos criados nesta sessão
         await Promise.all(
           vinculadasDuranteEdicao.map(cid =>
             new Promise(resolve => {
@@ -59,10 +64,27 @@
     });
   });
 
+  
   function carregarQuartos() {
     return new Promise((resolve) => {
+
+      let url = API_LISTAR_QUARTOS;
+
+      if (modo === "criar") {
+        // Criando → só quartos com espaço
+        url += "?apenas_com_espaco=1";
+
+      } else {
+        // Editando - quartos com espaço + incluir quarto atual
+        if (quartoParam) {
+          url += "?apenas_com_espaco=1&quarto_atual=" + encodeURIComponent(quartoParam);
+        } else {
+          url += "?apenas_com_espaco=1";
+        }
+      }
+
       const xhr = new XMLHttpRequest();
-      xhr.open("GET", API_LISTAR_QUARTOS, true);
+      xhr.open("GET", url, true);
       xhr.onload = function () {
         const arr = JSON.parse(xhr.responseText);
         quartoSelect.innerHTML = "";
@@ -95,7 +117,6 @@
     xhr.send();
   }
 
-  // busca de características
   function onSearch(e) {
     const q = e.target.value.trim();
     if (!q) { suggestionsEl.style.display = "none"; return; }
@@ -115,7 +136,7 @@
             if (vagaIdEl.value) {
               vincularCaracteristica(vagaIdEl.value, newCarac.id, () => {
                 tags.push(newCarac);
-                vinculadasDuranteEdicao.push(newCarac.id); // novo vínculo
+                vinculadasDuranteEdicao.push(newCarac.id);
                 renderTags();
               });
             } else {
@@ -140,9 +161,7 @@
               if (vagaIdEl.value) {
                 vincularCaracteristica(vagaIdEl.value, c.id, () => {
                   tags.push({ id: c.id, nome: c.nome });
-
-                  vinculadasDuranteEdicao.push(c.id); // registra novo vínculo
-
+                  vinculadasDuranteEdicao.push(c.id);
                   renderTags();
                 });
               } else {
@@ -178,9 +197,7 @@
     const xhr = new XMLHttpRequest();
     xhr.open("POST", API_VINCULAR, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onload = function () {
-      cb && cb();
-    };
+    xhr.onload = function () { cb && cb(); };
     xhr.send("vaga_id=" + encodeURIComponent(vaga_id) + "&caracteristica_id=" + encodeURIComponent(carac_id));
   }
 
@@ -242,7 +259,7 @@
       const res = JSON.parse(xhr.responseText);
       if (res.status === "OK") {
         alert("Vaga salva.");
-        window.location.href = "gerenciar_vagas.html?quarto_id=" + encodeURIComponent(payload.quarto_id);
+        window.location.href = "gerenciar_vagas.html";
       } else {
         alert("Erro ao salvar: " + (res.erro || "desconhecido"));
       }

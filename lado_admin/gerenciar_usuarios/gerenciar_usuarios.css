@@ -1,0 +1,154 @@
+/* gerenciar_usuarios.css - segue o estilo pastel já usado */
+
+.panel-filters {
+  background: #fff;
+  padding: 12px 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+  margin: 18px;
+}
+
+.search-row {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.search-row input[type="text"],
+.search-row input[type="date"],
+.search-row select,
+.search-row input {
+  padding: 8px 10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  background:#fafafa;
+  font-size:0.95rem;
+}
+
+#searchInput {
+  flex: 1 1 260px;
+  min-width:150px;
+}
+
+.panel-user {
+  background: #fff;
+  border-radius: 10px;
+  margin: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.user-left {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  min-width:0;
+}
+
+.avatar {
+  width:48px;
+  height:48px;
+  border-radius:8px;
+  background:#e6f7f6;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  color:#003366;
+  flex-shrink:0;
+}
+
+.user-meta {
+  min-width:0;
+}
+
+.user-meta h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #003366;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-meta p {
+  margin:2px 0;
+  color:#555;
+  font-size:0.9rem;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.user-right {
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.btn-edit-user, .btn-desativar {
+  padding:8px 12px;
+  border-radius:8px;
+  border:0;
+  cursor:pointer;
+}
+
+.btn-edit-user { background:#003366; color:white; }
+.btn-desativar { background: #f0ad4e; color:white; }
+
+.status-badge {
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.status-ativo { background:#d9f7e8; color:#006644; }
+.status-inativo { background:#f4f4f4; color:#666666; }
+.status-bloqueado { background:#ffdede; color:#6a0000; border:1px solid #ffbdbd; }
+
+/* mobile */
+@media (max-width:800px) {
+  .user-right { flex-direction:column; align-items:flex-end; }
+  .panel-user { flex-direction:column; align-items:flex-start; }
+}
+
+
+/* Estilo do filtro */
+
+.search-row button {
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+/* Botão Filtrar */
+#btnSearch {
+  background: #003366;   /* azul pastel escuro */
+  color: white;
+}
+
+#btnSearch:hover {
+  opacity: 0.85;
+}
+
+/* Botão Limpar */
+#btnClear {
+  background: #e6f0ff;    /* azul pastel claro */
+  color: #003366;
+  border: 1px solid #aac5ff;
+}
+
+#btnClear:hover {
+  background: #d8e6ff;
+}
+

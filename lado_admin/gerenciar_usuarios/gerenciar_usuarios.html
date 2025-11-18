@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <title>Gerenciar Usuários — Admin</title>
+  <link rel="stylesheet" href="../gerenciar_quartos/gerenciar_quartos.css"> <!-- reuse visual -->
+  <link rel="stylesheet" href="gerenciar_usuarios.css">
+</head>
+<body>
+
+  <aside class="sidebar">
+    <h2 class="sidebar-title"><a href="../admin_main/adm_home.html">Painel Admin</a></h2>
+    <nav>
+      <a href="../gerenciar_quartos/gerenciar_quartos.html">Gerenciar Quartos</a>
+      <a href="../gerenciar_vagas/gerenciar_vagas.html">Gerenciar Vagas</a>
+      <a href="../gerenciar_reservas/gerenciar_reservas.html">Gerenciar Reservas</a>
+      <a href="gerenciar_usuarios.html">Gerenciar Usuários</a>
+      <a href="#">Configurações</a>
+      <a href="../../login/login.html">Logout</a>
+    </nav>
+  </aside>
+
+  <main class="main-area">
+    <header class="topbar">
+      <h1>Gerenciar Usuários</h1>
+      <div>
+        <button class="btn-add" id="btnAdd">+ Adicionar Usuário</button>
+      </div>
+    </header>
+
+    <section class="panel-filters">
+      <div class="search-row">
+        <input id="searchInput" placeholder="Buscar por nome, email ou CPF" />
+        <select id="filterStatus">
+          <option value="">Todos os status</option>
+          <option value="ativo">Ativo</option>
+          <option value="inativo">Inativo</option>
+          <option value="bloqueado">Bloqueado</option>
+        </select>
+        <select id="filterFuncao">
+          <option value="">Todas as funções</option>
+          <option value="cliente">Cliente</option>
+          <option value="administrador">Administrador</option>
+        </select>
+        <input type="date" id="nascFrom" title="Nascimento a partir de">
+        <input type="date" id="nascTo" title="Nascimento até">
+        <button id="btnSearch">Filtrar</button>
+        <button id="btnClear">Limpar</button>
+      </div>
+    </section>
+
+    <section id="usuarios-container">
+      <p id="loading">Carregando usuários...</p>
+    </section>
+  </main>
+
+<script src="gerenciar_usuarios.js"></script>
+</body>
+</html>
