@@ -110,7 +110,8 @@ CREATE INDEX idx_reservas_status ON reservas(status);
 
 -- Usuários (IDs automáticos)
 INSERT INTO usuarios (nome, cpf, nascimento, email, senha, funcao) VALUES 
-('Administrador Principal', '111.111.111-11', '1980-01-01', 'admin@example.com', '123', 'administrador'),
+('Administrador Principal', '111.111.111-11', '1980-01-01', 'admin@gmail.com', '123', 'administrador'),
+('Cliente', '777.777.777-77', '1990-05-12', 'cliente@gmail.com', '123', 'cliente'),
 ('João Silva', '222.222.222-22', '1990-05-12', 'joao@example.com', '123', 'cliente'),
 ('Maria Santos', '333.333.333-33', '1992-08-20', 'maria@example.com', '123', 'cliente'),
 ('Carlos Pereira', '444.444.444-44', '1995-03-15', 'carlos@example.com', '123', 'cliente'),
@@ -179,7 +180,7 @@ INSERT INTO caracteristicas_quartos (quarto_id, caracteristica_id) VALUES
 
 INSERT INTO quartos (titulo, descricao, total_vagas, preco_base, img0) VALUES
 ('Q103 - Quarto Feminino', 'Quarto coletivo feminino, ventilado e iluminado.', 3, 90.00,
-'https://i.imgur.com/8QZ7yUO.jpeg');
+'https://cf.bstatic.com/xdata/images/hotel/max1024x768/525325218.jpg?k=0d067d70cd2729dce82c1957e8f1b89685d4f42b3f5f407aa5ec829e7e2e5777&o=');
 
 INSERT INTO vagas (quarto_id, nome, adicional, disponivel) VALUES
 (3,'Beliche Superior A',25.00,TRUE),  -- id 2
@@ -203,7 +204,7 @@ INSERT INTO caracteristicas_vagas (vaga_id, caracteristica_id) VALUES
 
 INSERT INTO quartos (titulo, descricao, total_vagas, preco_base, img0) VALUES
 ('Q104 - Misto Conforto', 'Quarto misto com camas confortáveis.', 2, 120.00,
-'https://cdn.homedit.com/wp-content/uploads/2020/04/Shared-bedroom-design-for-adult.jpg');
+'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/f8/22/4f/the-bee-hostel.jpg?w=900&h=500&s=1');
 
 INSERT INTO vagas (quarto_id, nome, adicional, disponivel) VALUES
 (4,'Cama Solteiro B',15.00,FALSE), -- id 5
@@ -229,7 +230,7 @@ INSERT INTO reservas (vaga_id, hospede_id, inicio_periodo, fim_periodo, status, 
 
 INSERT INTO quartos (titulo, descricao, total_vagas, preco_base, img0) VALUES
 ('Q105 - Dormitório Grande', 'Quarto amplo com várias camas e boa circulação.', 6, 70.00,
-'https://i.imgur.com/MtXqz0A.jpeg');
+'https://images.trvl-media.com/lodging/19000000/18440000/18431100/18431032/a06599ef.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill');
 
 INSERT INTO vagas (quarto_id, nome, adicional, disponivel) VALUES
 (5,'Beliche Sup D',10.00,FALSE), -- id 7
