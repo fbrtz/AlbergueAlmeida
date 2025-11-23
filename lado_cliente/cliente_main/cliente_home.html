@@ -1,12 +1,170 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<title>Área do Cliente</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Albergue Santa Teresa - Início</title>
+    <link rel="stylesheet" href="cliente_style.css">
+    <link rel="stylesheet" href="../login/login.css">
+
+    <style>
+        /* ==== Carrossel base ==== */
+        
+        .promo-slider {
+            position: relative;
+            overflow: hidden;
+            padding: 12px 0;
+        }
+        
+        .slides {
+            display: flex;
+            gap: 12px;
+            transition: transform .45s ease;
+        }
+        
+        .slide {
+            flex: 0 0 300px;
+            box-sizing: border-box;
+            background: #fff;
+            padding: 16px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
+        }
+        /* ==== Dots ==== */
+        
+        .dots {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+            border: none;
+        }
+        
+        .dot.active {
+            background: #007bff;
+        }
+        /* ==== Setas ==== */
+        
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: background .2s ease;
+        }
+        
+        .arrow:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .arrow.left {
+            left: 10px;
+        }
+        
+        .arrow.right {
+            right: 10px;
+        }
+    </style>
 </head>
+
 <body>
-<a href="../login/login.html">Logout</a>
-<h1>Bem-vindo, Cliente!</h1>
-<p>Aqui você poderá acompanhar suas reservas.</p>
+
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="brand">
+                <div class="logo"></div>
+            </div>
+
+            <nav class="main-nav">
+                <a href="cliente_home.html">Reserva</a>
+                <a href="../../sobre_nos/sobre_nos.html">Sobre Nós</a>
+                <a href="#">Parceiros</a>
+            </nav>
+
+            <div class="top-actions">
+                <button class="lang">🇺🇸</button>
+                <a class="user" href="#">👤</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="search-area">
+        <button class="back">‹</button>
+        <div class="search-box">
+            <input type="date" id="homeCheckIn" class="search-field" placeholder="Check-in">
+            <input type="date" id="homeCheckOut" class="search-field" placeholder="Check-out">
+            <div class="guests-input">
+                <button class="guest-btn" id="homeMinus">−</button>
+                <span id="homeGuestCount">2</span>
+                <button class="guest-btn" id="homePlus">+</button>
+            </div>
+        </div>
+        <button class="cta" id="searchCta">Continuar</button>
+    </section>
+
+    <main class="container">
+
+        <h2 class="section-title">Promoções!</h2>
+
+        <!-- ====================== CARROSSEL ========================= -->
+
+        <div class="promo-slider">
+
+            <!-- Setas (NOVO) -->
+            <button class="arrow left">‹</button>
+            <button class="arrow right">›</button>
+
+            <div class="slides" id="promoSlides">
+                <div class="slide">
+                    <h3>Promoção: 20% off — Quartos Compartilhados</h3>
+                    <p>Descontos ativos de segunda a quinta para reservas antecipadas.</p>
+                </div>
+
+                <div class="slide">
+                    <h3>Café da Manhã Incluso</h3>
+                    <p>Café da manhã grátis em todas as reservas de sexta a domingo.</p>
+                </div>
+
+                <div class="slide">
+                    <h3>Política Flexível</h3>
+                    <p>Cancelamento gratuito até 48h antes da chegada.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="dots" id="promoDots">
+            <button class="dot active"></button>
+            <button class="dot"></button>
+            <button class="dot"></button>
+        </div>
+
+        <!-- =========================================================== -->
+
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="cliente_home.js"></script>
+
 </body>
+
 </html>

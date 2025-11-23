@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<title>Login - Hostel</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">s
-<link rel="stylesheet" href="login.css">
+    <meta charset="UTF-8">
+    <title>Login - Hostel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">s
+    <link rel="stylesheet" href="login.css">
 </head>
 
 <body>
@@ -12,9 +13,9 @@
     <header class="navbar">
         <div class="logo">Santa Teresa Hostel</div>
         <nav class="nav-links">
-        <a href="#">Reserva</a>
-        <a href="../sobre_nos/sobre_nos.html">Sobre Nós</a>
-        <a href="#">Parceiros</a>
+            <a href="#">Reserva</a>
+            <a href="../sobre_nos/sobre_nos.html">Sobre Nós</a>
+            <a href="#">Parceiros</a>
         </nav>
         <div class="icons">
         </div>
@@ -37,32 +38,55 @@
         </form>
     </div>
 
-<script>
-document.getElementById("formLogin").addEventListener("submit", function(e){
-    e.preventDefault();
+    <script>
+        document.getElementById("formLogin").addEventListener("submit", function(e) {
+            e.preventDefault();
 
-    let email = document.getElementById("email").value;
-    let senha = document.getElementById("senha").value;
+            let email = document.getElementById("email").value;
+            let senha = document.getElementById("senha").value;
 
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "login.php", true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "login.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-    xhr.onload = function(){
-        if (this.responseText === "adm"){
-            window.location.href = "../lado_admin/admin_main/adm_home.html";
-        } 
-        else if (this.responseText === "cliente"){
-            window.location.href = "../lado_cliente/cliente_home.html";
-        }
-        else {
-            document.getElementById("msg").innerText = this.responseText;
-        }
-    };
+            xhr.onload = function() {
+                try {
+                    const response = JSON.parse(this.responseText);
 
-    xhr.send("email=" + email + "&senha=" + senha);
-});
-</script>
+                    if (response.success) {
+                        // Salvar dados do usuário logado em localStorage
+                        // IMPORTANTE: localStorage.setItem sempre salva como STRING
+                        const userId = String(response.user_id);
+                        console.log('DEBUG login.html: response.user_id =', response.user_id, 'tipo:', typeof response.user_id);
+                        localStorage.setItem('userId', userId);
+                        localStorage.setItem('userRole', response.role);
+                        localStorage.setItem('userEmail', email);
+                        localStorage.setItem('userName', response.name || '');
+                        localStorage.setItem('userBirth', response.birth || '');
+
+                        console.log('DEBUG login.html: após setItem - localStorage.userId =', localStorage.getItem('userId'), 'parsed =', parseInt(localStorage.getItem('userId'), 10));
+                        console.log('User logged in:', {
+                            userId: userId,
+                            role: response.role,
+                            name: response.name,
+                            birth: response.birth
+                        });
+
+                        // Redirecionar para a página apropriada
+                        window.location.href = response.redirect;
+                    } else {
+                        document.getElementById("msg").innerText = response.message || 'Erro no login';
+                    }
+                } catch (e) {
+                    // Se não for JSON, mostrar resposta como texto
+                    document.getElementById("msg").innerText = this.responseText || 'Erro desconhecido';
+                }
+            };
+
+            xhr.send("email=" + encodeURIComponent(email) + "&senha=" + encodeURIComponent(senha));
+        });
+    </script>
 
 </body>
+
 </html>

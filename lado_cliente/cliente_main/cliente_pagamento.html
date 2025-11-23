@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pagamento - Santa Teresa Hostel</title>
+    <link rel="stylesheet" href="cliente_pagamento_style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="brand">
+                <div class="logo"></div>
+            </div>
+            <nav class="main-nav">
+                <a href="cliente_home.html">Reserva</a>
+                <a href="../../sobre_nos/sobre_nos.html">Sobre Nós</a>
+                <a href="#">Parceiros</a>
+            </nav>
+            <div class="top-actions">
+                <button class="lang">🇺🇸</button>
+                <a class="user" href="#">👤</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container pagamento-container">
+        <div class="left">
+            <section class="card payment-card">
+                <h3>Forma de Pagamento</h3>
+                <div class="card-logos">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="mastercard">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="visa">
+                </div>
+
+                <form id="paymentForm">
+                    <label>Nome do titular do cartão</label>
+                    <input type="text" id="cardName" placeholder="Nome como no cartão" required>
+
+                    <label>Número do cartão de crédito</label>
+                    <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" required>
+
+                    <div class="row">
+                        <div class="col">
+                            <label>Data de validade</label>
+                            <div class="inline">
+                                <select id="expMonth"></select>
+                                <select id="expYear"></select>
+                            </div>
+                        </div>
+                        <div class="col small">
+                            <label>Código de segurança</label>
+                            <input type="text" id="cvv" placeholder="CVC" required>
+                        </div>
+                    </div>
+
+                    <div class="actions" style="display:flex; gap:10px; align-items:center;">
+                        <button type="button" id="confirmPayment" class="cta">Concluir Reserva</button>
+                        <button type="button" id="cancelPayment" class="btn-cancel">Cancelar Compra</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="card cancel-card">
+                <h4>Política de Cancelamento</h4>
+                <p>Cancelamentos efetuados após 3 dias da data da reserva não poderão ser processados.</p>
+                <label class="checkbox"><input type="checkbox" id="agreeCancel"> Concordo com a Política de Cancelamento.</label>
+            </section>
+
+            <section class="card info-card">
+                <h4>Informações importantes</h4>
+                <ul>
+                    <li>A recepção funciona diariamente no seguinte horário: 8h - 23h.</li>
+                    <li>O funcionário da recepção vai receber os hóspedes na chegada.</li>
+                </ul>
+                <div class="dates">
+                    <div>
+                        <strong>Check-in</strong>
+                        <div id="infoCheckIn">—</div>
+                    </div>
+                    <div>
+                        <strong>Check-out</strong>
+                        <div id="infoCheckOut">—</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <aside class="right">
+            <div class="card summary-card">
+                <div class="room-thumb">
+                    <img id="roomImage" src="" alt="room" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22120%22%3E%3Crect fill=%22%23e0e0e0%22 width=%22160%22 height=%22120%22/%3E%3C/svg%3E'">
+                </div>
+                <div class="room-title" id="roomTitle">Quarto</div>
+                <div class="room-meta" id="roomMeta">—</div>
+                <div class="rating"><span id="roomRating">8.6</span> • <span id="roomReviews">80</span> avaliações</div>
+
+                <div class="reservation-details">
+                    <h5>Sua Reserva</h5>
+                    <div class="detail-section">
+                        <label>Quarto</label>
+                        <div id="summaryRoom">—</div>
+                    </div>
+                    <div class="detail-section">
+                        <label>Vaga</label>
+                        <div id="summaryVaga">—</div>
+                    </div>
+                    <div class="detail-section">
+                        <label>Check-in</label>
+                        <div id="summaryCheckIn">—</div>
+                    </div>
+                    <div class="detail-section">
+                        <label>Check-out</label>
+                        <div id="summaryCheckOut">—</div>
+                    </div>
+                </div>
+
+                <div class="price-box">
+                    <h5>Detalhes do Preço</h5>
+                    <div class="price-row"><span id="priceBase">—</span><span id="priceBaseValue">R$ —</span></div>
+                    <div class="price-row"><span id="priceSurcharge">—</span><span id="priceSurchargeValue">R$ —</span></div>
+                    <div class="price-row"><span id="priceNights">—</span><span id="pricePerNight">R$ —</span></div>
+                    <div class="price-row small"><span>Impostos</span><span id="priceTaxes">R$ 0,00</span></div>
+                    <div class="price-row total"><span>Total</span><span id="priceTotal">R$ —</span></div>
+                    <div class="pay-options">
+                        <div>Pagar agora <span id="payNow">R$ —</span></div>
+                        <div>Pagar na propriedade <span id="payLater">R$ —</span></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="cliente_pagamento.js"></script>
+</body>
+
+</html>

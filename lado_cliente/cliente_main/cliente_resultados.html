@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados da Busca - Santa Teresa Hostel</title>
+    <link rel="stylesheet" href="cliente_resultados_style.css">
+</head>
+
+<body>
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="topbar-inner">
+            <div class="brand">
+                <div class="logo"></div>
+            </div>
+            <nav class="main-nav">
+                <a href="cliente_home.html">Reserva</a>
+                <a href="#sobre">Sobre Nós</a>
+                <a href="#parceiros">Parceiros</a>
+            </nav>
+            <div class="top-actions">
+                <button class="lang">🇺🇸</button>
+                <a href="#" class="user">👤</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search bar with back button -->
+    <div class="search-area">
+        <button class="back">‹</button>
+        <div class="search-box">
+            <input type="date" id="checkInInput" class="search-field" placeholder="Check-in">
+            <input type="date" id="checkOutInput" class="search-field" placeholder="Check-out">
+            <div class="guests-selector">
+                <button class="guest-btn" id="guestMinus">−</button>
+                <span id="guestCount">2</span>
+                <button class="guest-btn" id="guestPlus">+</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main container -->
+    <div class="container">
+        <!-- Filters Section -->
+        <div class="content-wrapper">
+            <aside class="filters-section">
+                <h3 class="filter-title">filtros:</h3>
+
+                <div id="filtersContainer">
+                    <!-- Filtros de características serão renderizados aqui dinamicamente -->
+                </div>
+
+                <!-- Calendar -->
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button id="prevMonth" class="month-nav">‹</button>
+                        <h4 id="monthYear"></h4>
+                        <button id="nextMonth" class="month-nav">›</button>
+                    </div>
+                    <div class="calendar">
+                        <div class="weekdays">
+                            <span>dom.</span>
+                            <span>seg.</span>
+                            <span>ter.</span>
+                            <span>qua.</span>
+                            <span>qui.</span>
+                            <span>sex.</span>
+                            <span>sáb.</span>
+                        </div>
+                        <div class="days" id="calendarDays"></div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Results Section -->
+            <main class="results-section">
+                <div class="results-list" id="resultsList">
+                    <!-- Results will be populated here -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal de Vagas Disponíveis -->
+    <div id="vagasModal" class="modal" aria-hidden="true">
+        <div class="modal-overlay" id="vagasOverlay"></div>
+        <div class="modal-content" role="dialog" aria-modal="true">
+            <button class="modal-close" id="vagasClose">×</button>
+            <h3 class="modal-title">
+                Selecione uma Vaga - <span id="vagasRoomTitle"></span>
+            </h3>
+            <div class="vagas-container" id="vagasContainer">
+                <!-- Renderizado dinamicamente -->
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="cliente_resultados.js"></script>
+</body>
+
+</html>
