@@ -68,209 +68,77 @@ body {
 
 .sobre {
     margin-top: 1px;
-    background: #85cae6;
-    background: linear-gradient(90deg,rgba(133, 202, 230, 1) 0%, rgba(11, 27, 108, 1) 100%);
+    background: linear-gradient(90deg, rgba(133,202,230,1) 0%, rgba(11,27,108,1) 100%);
     color: white;
     padding: 60px 40px;
-    width: 50%;
-    height: 2000px;
+    width: 100%;
 }
 
 .sobre h2 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 60px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.sobre-grid .imagem img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.sobre-grid .texto {
+    position: relative;
+    padding: 30px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+}
+
+.sobre-grid .texto p {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+}
+
+.sobre-grid .texto .num {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 700;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 
-/* -------------------- SOBRE NÓS ESQUERDA -------------------- */
+/* ------- MOBILE ------- */
+@media (max-width: 900px) {
+    .sobre-grid {
+        grid-template-columns: 1fr;
+    }
 
-
-.grid-sobre-esquerda {
-    position: absolute;
-    left: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    align-items: center;
+    .sobre-grid .texto .num {
+        left: 10px;
+        top: 10px;
+        width: 45px;
+        height: 45px;
+    }
 }
 
-.grid-sobre-esquerda .extra1{
-    position: absolute;
-    left: 150px;
-    top: 680px;
-    width: 600px;
-    border-radius: 10px;
-    height: auto;
-    display: block; 
-}
-
-.grid-sobre-esquerda .extra2{
-    position: absolute;
-    left: 1055px;
-    top: 40px;
-    width: 600px;
-    border-radius: 10px;
-    height: auto;
-}
-
-.grid-sobre-esquerda .item-acima img {
-    position: absolute;
-    left: 150px;
-    top: 200px;
-    width: 600px;
-    border-radius: 10px;
-    height: auto;
-    display: block;
-}
-
-.grid-sobre-esquerda .item-abaixo img {
-    position: absolute;
-    left: 150px;
-    top: 1300px;
-    width: 600px;
-    border-radius: 10px;
-    height: auto;
-    display: block;
-}
-
-
-
-.grid-sobre-esquerda .item-acima p {
-    margin-top: 48px;
-    padding-right:40px;
-    padding-left:40px;
-    font-size: 1.3rem;
-    color: white;
-}
-
-.grid-sobre-esquerda .item-abaixo p {
-    position: absolute;
-    left: 20px;
-    top: 1130px;
-    padding-right:40px;
-    padding-left:40px;
-    font-size: 1.3rem;
-    color: white;
-}
-
-.grid-sobre-esquerda .item-acima .num {
-    position: absolute;
-    top: 10px;
-    left: 855px;
-    background-color: #e0e0e0;
-    color: #000;
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 400;
-    font-size: 2rem;
-}
-
-.grid-sobre-esquerda .item-abaixo .num {
-    position: absolute;
-    top: 1110px;
-    left: 855px;
-    background-color: #e0e0e0;
-    color: #000;
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 400;
-    font-size: 2rem;
-}
-
-
-/* -------------------- SOBRE NÓS DIREITA -------------------- */
-
-.grid-sobre-direita {
-    position: absolute;
-    right: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    align-items: center;
-}
-
-
-.grid-sobre-direita .item-acima img {
-    position: absolute;
-    right: 150px;
-    top: 650px;
-    width: 600px;
-    border-radius: 10px;
-    height: auto;
-    display: block;
-}
-
-.grid-sobre-direita .item-abaixo img {
-    position: absolute;
-    right: 150px;
-    top: 1150px;
-    width: 600px;
-    border-radius: 10px;
-    height: auto;
-    display: block;
-}
-
-
-
-.grid-sobre-direita .item-acima p {
-    position: absolute;
-    left: -800px;
-    top: 520px;
-    padding-right:40px;
-    padding-left:40px;
-    font-size: 1.3rem;
-    color: black;
-}
-
-.grid-sobre-direita .item-abaixo p {
-    position: absolute;
-    left: -800px;
-    top: 1618px;
-    padding-right:40px;
-    padding-left:40px;
-    font-size: 1.3rem;
-    color: black;
-}
-
-.grid-sobre-direita .item-acima .num {
-    position: absolute;
-    top: 500px;
-    right: 855px;
-    background-color: #e0e0e0;
-    color: #000;
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 400;
-    font-size: 2rem;
-}
-
-.grid-sobre-direita .item-abaixo .num {
-    position: absolute;
-    top: 1600px;
-    right: 855px;
-    background-color: #e0e0e0;
-    color: #000;
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 400;
-    font-size: 2rem;
-}
 
 /* -------------------- AVALIAÇÕES -------------------- */
 .avaliacoes {
